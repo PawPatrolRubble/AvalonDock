@@ -1,10 +1,9 @@
 using System.IO;
 using System.Windows.Input;
-using System.Windows.Media;
 
-namespace AvalonDock.VS2013Test.ViewModels
+namespace VS2013Test.ViewModels
 {
-	class FileViewModel : PaneViewModel
+	public class FileViewModel : PaneViewModel
 	{
 		#region fields
 		//private static ImageSourceConverter ISC = new ImageSourceConverter();

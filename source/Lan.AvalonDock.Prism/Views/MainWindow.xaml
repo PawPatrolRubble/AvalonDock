@@ -1,22 +1,24 @@
 <Window
-    x:Class="VS2013Test.Views.MainView"
+    x:Class="Lan.AvalonDock.PrismTest.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:icons="clr-namespace:VS2013Test.Icons"
+    xmlns:icons="clr-namespace:VS2013Test.Icons;assembly=VS2013Test"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:regions="http://prismlibrary.com/"
-    xmlns:viewModels="clr-namespace:VS2013Test.ViewModels"
-    xmlns:vs2013Test="clr-namespace:VS2013Test"
-    Title="VS2013Test"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:viewModels="clr-namespace:Lan.AvalonDock.PrismTest.ViewModels"
+    xmlns:vs2013Test="clr-namespace:VS2013Test;assembly=VS2013Test"
+    Title="{Binding Title}"
     Width="1600"
     Height="900"
     MinWidth="140"
     MinHeight="116"
     MaxWidth="{x:Static SystemParameters.MaximizedPrimaryScreenWidth}"
     MaxHeight="{x:Static SystemParameters.MaximizedPrimaryScreenHeight}"
-    d:DataContext="{d:DesignInstance viewModels:Workspace,
-                                     IsDesignTimeCreatable=True}"
+    d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
+    d:DesignHeight="1080"
+    d:DesignWidth="1920"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     Background="{DynamicResource HeaderBackground}"
     Foreground="{DynamicResource WindowForeground}"
     ResizeMode="CanResizeWithGrip"
@@ -24,6 +26,7 @@
     StateChanged="WindowStateChanged"
     WindowStyle="None"
     mc:Ignorable="d">
+
 
     <WindowChrome.WindowChrome>
         <WindowChrome
@@ -95,7 +98,6 @@
                     <MenuItem Header="File">
                         <MenuItem Command="{Binding NewCommand}" Header="New" />
                         <MenuItem Command="{Binding OpenCommand}" Header="Open" />
-                        <MenuItem Command="{Binding CommandNameCommand}" Header="Page2" />
                         <Separator />
                         <MenuItem Command="{Binding ActiveDocument.SaveCommand}" Header="Save" />
                         <MenuItem Command="{Binding ActiveDocument.SaveAsCommand}" Header="Save As..." />
@@ -236,22 +238,11 @@
 
         <DockingManager
             Grid.Row="1"
-            regions:RegionManager.RegionName="ContentRegion"
-            ActiveContent="{Binding ActiveDocument, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
+            prism:RegionManager.RegionName="ContentRegion"
             AnchorablesSource="{Binding Tools}"
-            AutoHideDelay="0"
-            DocumentsSource="{Binding DockingNavigationService.Files}"
-            Theme="{Binding SelectedTheme.Item2}">
-
+            AutoHideDelay="0">
             <DockingManager.LayoutItemTemplateSelector>
                 <vs2013Test:PanesTemplateSelector>
-
-                    <vs2013Test:PanesTemplateSelector.FileDocumentViewTemplate>
-                        <DataTemplate>
-                            <ContentControl Content="{Binding}" />
-                        </DataTemplate>
-                    </vs2013Test:PanesTemplateSelector.FileDocumentViewTemplate>
-
                     <vs2013Test:PanesTemplateSelector.FileViewTemplate>
                         <DataTemplate>
                             <Grid>
@@ -323,10 +314,10 @@
                     </vs2013Test:PanesStyleSelector.ToolStyle>
                     <vs2013Test:PanesStyleSelector.FileStyle>
                         <Style TargetType="{x:Type LayoutItem}">
-                            <Setter Property="Title" Value="{Binding .Model.Title}" />
+                            <Setter Property="Title" Value="{Binding Model.Title}" />
                             <Setter Property="ToolTip" Value="{Binding Model.FilePath}" />
-                            <Setter Property="CloseCommand" Value="{Binding Model.DataContext.CloseCommand}" />
-                            <Setter Property="ContentId" Value="{Binding Model.DataContext.ContentId}" />
+                            <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
+                            <Setter Property="ContentId" Value="{Binding Model.ContentId}" />
                         </Style>
                     </vs2013Test:PanesStyleSelector.FileStyle>
                 </vs2013Test:PanesStyleSelector>

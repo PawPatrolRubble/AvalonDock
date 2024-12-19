@@ -1,10 +1,10 @@
-using System.Windows.Controls;
 using System.Windows;
-using AvalonDock.VS2013Test.ViewModels;
+using System.Windows.Controls;
+using VS2013Test.ViewModels;
 
-namespace AvalonDock.VS2013Test
+namespace VS2013Test
 {
-	class PanesStyleSelector : StyleSelector
+	public class PanesStyleSelector : StyleSelector
 	{
 		public Style ToolStyle
 		{

@@ -1,10 +1,9 @@
 using System;
 using System.IO;
-using System.Windows.Media.Imaging;
 
-namespace AvalonDock.VS2013Test.ViewModels
+namespace VS2013Test.ViewModels
 {
-	internal class ErrorViewModel : ToolViewModel
+	public class ErrorViewModel : ToolViewModel
 	{
 		#region fields
 		public const string ToolContentId = "FileStatsTool";

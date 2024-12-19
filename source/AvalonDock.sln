@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.352
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "TestApp\TestApp.csproj", "{339BC0D5-2A54-40ED-9850-7ED65182E6E1}"
 EndProject
@@ -43,6 +43,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliburnDockTestApp", "CaliburnDockTestApp\CaliburnDockTestApp.csproj", "{F8AEE594-DB5E-4DB8-9F45-4969CA5F8EF1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VS2013Test", "VS2013Test\VS2013Test.csproj", "{12C5DFE9-27AE-4BAB-9050-617F8A7FC52E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lan.AvalonDock.PrismTest", "Lan.AvalonDock.Prism\Lan.AvalonDock.PrismTest.csproj", "{C5C2C2BB-D331-4190-87DF-B10289DACBDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -258,6 +260,18 @@ Global
 		{12C5DFE9-27AE-4BAB-9050-617F8A7FC52E}.Release|x64.Build.0 = Release|Any CPU
 		{12C5DFE9-27AE-4BAB-9050-617F8A7FC52E}.Release|x86.ActiveCfg = Release|Any CPU
 		{12C5DFE9-27AE-4BAB-9050-617F8A7FC52E}.Release|x86.Build.0 = Release|Any CPU
+		{C5C2C2BB-D331-4190-87DF-B10289DACBDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5C2C2BB-D331-4190-87DF-B10289DACBDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5C2C2BB-D331-4190-87DF-B10289DACBDA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C5C2C2BB-D331-4190-87DF-B10289DACBDA}.Debug|x64.Build.0 = Debug|Any CPU
+		{C5C2C2BB-D331-4190-87DF-B10289DACBDA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C5C2C2BB-D331-4190-87DF-B10289DACBDA}.Debug|x86.Build.0 = Debug|Any CPU
+		{C5C2C2BB-D331-4190-87DF-B10289DACBDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5C2C2BB-D331-4190-87DF-B10289DACBDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5C2C2BB-D331-4190-87DF-B10289DACBDA}.Release|x64.ActiveCfg = Release|Any CPU
+		{C5C2C2BB-D331-4190-87DF-B10289DACBDA}.Release|x64.Build.0 = Release|Any CPU
+		{C5C2C2BB-D331-4190-87DF-B10289DACBDA}.Release|x86.ActiveCfg = Release|Any CPU
+		{C5C2C2BB-D331-4190-87DF-B10289DACBDA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

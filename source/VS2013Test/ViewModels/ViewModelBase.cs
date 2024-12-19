@@ -1,17 +1,18 @@
 using System.ComponentModel;
+using Prism.Mvvm;
 
-namespace AvalonDock.VS2013Test.ViewModels
+namespace VS2013Test.ViewModels
 {
-	class ViewModelBase : INotifyPropertyChanged
+	public class ViewModelBase : BindableBase
 	{
 
-		protected virtual void RaisePropertyChanged(string propertyName)
-		{
-			if (PropertyChanged != null)
-				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-		}
+		//protected virtual void RaisePropertyChanged(string propertyName)
+		//{
+		//	//if (PropertyChanged != null)
+		//	//	PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		//}
 
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		//public event PropertyChangedEventHandler PropertyChanged;
 	}
 }

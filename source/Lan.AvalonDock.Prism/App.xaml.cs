@@ -1,28 +1,26 @@
 using System.Windows;
 using AvalonDock;
-using Lan.AvalonDock.PrismTest;
+using Lan.AvalonDock.PrismTest.Views;
 using Prism.DryIoc;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 
-using VS2013Test.Views;
-
-namespace VS2013Test
+namespace Lan.AvalonDock.PrismTest
 {
 	/// <summary>
 	/// Interaction logic for App.xaml
 	/// </summary>
-	public partial class App : PrismApplication
+	public partial class App:PrismApplication
 	{
 		protected override Window CreateShell()
 		{
-			return Container.Resolve<MainView>();
+			return Container.Resolve<MainWindow>();
 		}
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
 		{
-			containerRegistry.RegisterSingleton<IDockingNavigationService, DockingNavigationService>();
+
 		}
 
 
@@ -32,10 +30,7 @@ namespace VS2013Test
 
 			var regionManager = Container.Resolve<IRegionManager>();
 
-			regionManager.RequestNavigate("ContentRegion", nameof(Page2), s =>
-			{
-				;
-			});
+			regionManager.RequestNavigate("ContentRegion", nameof(FileViewA));
 
 		}
 		protected override void ConfigureRegionAdapterMappings(RegionAdapterMappings mappings)

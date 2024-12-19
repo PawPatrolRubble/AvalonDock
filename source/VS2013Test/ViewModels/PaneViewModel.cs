@@ -1,8 +1,8 @@
 using System.Windows.Media;
 
-namespace AvalonDock.VS2013Test.ViewModels
+namespace VS2013Test.ViewModels
 {
-	class PaneViewModel : ViewModelBase
+	public class PaneViewModel : ViewModelBase
 	{
 		#region fields
 		private string _title = null;

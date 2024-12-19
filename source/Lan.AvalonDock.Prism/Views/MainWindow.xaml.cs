@@ -1,18 +1,16 @@
 using System;
 using System.Windows;
-using VS2013Test.ViewModels;
 
-namespace VS2013Test.Views
+namespace Lan.AvalonDock.PrismTest.Views
 {
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainView : Window
-    {
-        public MainView()
-        {
-            InitializeComponent();
-			DataContext = Workspace.This;
+	public partial class MainWindow : Window
+	{
+		public MainWindow()
+		{
+			InitializeComponent();
 		}
 
 		private void MinimizeClick(object sender, RoutedEventArgs e)

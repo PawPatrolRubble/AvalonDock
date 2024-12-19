@@ -1,11 +1,11 @@
-using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Controls;
 using AvalonDock.Layout;
-using AvalonDock.VS2013Test.ViewModels;
+using VS2013Test.ViewModels;
 
-namespace AvalonDock.VS2013Test
+namespace VS2013Test
 {
-	class PanesTemplateSelector : DataTemplateSelector
+	public class PanesTemplateSelector : DataTemplateSelector
 	{
 		public PanesTemplateSelector()
 		{
@@ -53,12 +53,19 @@ namespace AvalonDock.VS2013Test
 			set;
 		}
 
+		public DataTemplate FileDocumentViewTemplate { get; set; }
+
 		public override DataTemplate SelectTemplate(object item, DependencyObject container)
 		{
 			var itemAsLayoutContent = item as LayoutContent;
 
+			
 			if (item is FileViewModel)
 				return FileViewTemplate;
+			if (item is FrameworkElement frameworkElement && frameworkElement.DataContext is PaneViewModel viewModel)
+			{
+				return FileDocumentViewTemplate;
+			}
 
 			if (item is PropertiesViewModel)
 				return PropertiesViewTemplate;

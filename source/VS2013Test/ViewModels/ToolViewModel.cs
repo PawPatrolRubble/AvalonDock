@@ -1,6 +1,6 @@
-namespace AvalonDock.VS2013Test.ViewModels
+namespace VS2013Test.ViewModels
 {
-	internal class ToolViewModel : PaneViewModel
+	public class ToolViewModel : PaneViewModel
 	{
 		#region fields
 		private bool _isVisible = true;

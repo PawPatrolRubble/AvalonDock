@@ -1,10 +1,10 @@
 using System.Linq;
 using AvalonDock.Layout;
-using AvalonDock.VS2013Test.ViewModels;
+using VS2013Test.ViewModels;
 
-namespace AvalonDock.VS2013Test
+namespace VS2013Test
 {
-	class LayoutInitializer : ILayoutUpdateStrategy
+	public class LayoutInitializer : ILayoutUpdateStrategy
 	{
 		public bool BeforeInsertAnchorable(LayoutRoot layout, LayoutAnchorable anchorableToShow, ILayoutContainer destinationContainer)
 		{

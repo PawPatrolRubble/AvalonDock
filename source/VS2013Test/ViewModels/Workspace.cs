@@ -1,5 +1,3 @@
-using AvalonDock.Themes;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,8 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using AvalonDock.Themes;
+using Microsoft.Win32;
+using Prism.Ioc;
+using Prism.Mvvm;
+using Prism.Regions;
+using VS2013Test.Views;
 
-namespace AvalonDock.VS2013Test.ViewModels
+namespace VS2013Test.ViewModels
 {
 	internal class Workspace : ViewModelBase
 	{
@@ -39,6 +43,9 @@ namespace AvalonDock.VS2013Test.ViewModels
 		public Workspace()
 		{
 			SelectedTheme = Themes.First();
+			DockingNavigationService = ContainerLocator.Current.Resolve<IDockingNavigationService>();
+			CommandNameCommand = new RelayCommand(CommandName);
+
 		}
 
 		#endregion constructors
@@ -46,6 +53,9 @@ namespace AvalonDock.VS2013Test.ViewModels
 		public event EventHandler ActiveDocumentChanged;
 
 		#region properties
+
+
+		public IDockingNavigationService DockingNavigationService { get; set; }
 
 		public static Workspace This => _this;
 
@@ -134,6 +144,17 @@ namespace AvalonDock.VS2013Test.ViewModels
 
 				return _toolbox;
 			}
+		}
+
+		public ICommand CommandNameCommand { get; }
+
+		private void CommandName(object para)
+		{
+			ContainerLocator.Current.Resolve<IRegionManager>().RequestNavigate("ContentRegion", nameof(Page2), navigationCallback:
+				s =>
+				{
+					;
+				});
 		}
 
 		public ICommand OpenCommand
@@ -297,6 +318,7 @@ namespace AvalonDock.VS2013Test.ViewModels
 
 		private void OnNew(object parameter)
 		{
+			//DockingNavigationService.Add(file);
 			_files.Add(new FileViewModel());
 			ActiveDocument = _files.Last();
 		}
