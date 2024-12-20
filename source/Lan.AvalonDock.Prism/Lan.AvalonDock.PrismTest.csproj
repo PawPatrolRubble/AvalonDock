@@ -10,4 +10,9 @@
   <ItemGroup>
     <ProjectReference Include="..\VS2013Test\VS2013Test.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\Page2.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

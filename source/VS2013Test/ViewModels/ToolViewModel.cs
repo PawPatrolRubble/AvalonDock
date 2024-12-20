@@ -16,10 +16,16 @@ namespace VS2013Test.ViewModels
 			Name = name;
 			Title = name;
 		}
+
+		public ToolViewModel()
+		{
+			
+		}
+
 		#endregion constructor
 
 		#region Properties
-		public string Name { get; private set; }
+		public string Name { get; set; }
 
 		public bool IsVisible
 		{

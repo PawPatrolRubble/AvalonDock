@@ -96,10 +96,9 @@
                     Style="{DynamicResource MetroMenu}"
                     WindowChrome.IsHitTestVisibleInChrome="True">
                     <MenuItem Header="File">
-                        <MenuItem Command="{Binding NewCommand}" Header="New" />
-                        <MenuItem Command="{Binding OpenCommand}" Header="Open" />
+                        <MenuItem Command="{Binding GoToCommand}" CommandParameter="FileViewA" Header="Open" />
                         <Separator />
-                        <MenuItem Command="{Binding ActiveDocument.SaveCommand}" Header="Save" />
+                        <MenuItem Command="{Binding GoToCommand}" CommandParameter="Page2" Header="Page 2" />
                         <MenuItem Command="{Binding ActiveDocument.SaveAsCommand}" Header="Save As..." />
                         <Separator />
                         <MenuItem Command="{Binding ActiveDocument.CloseCommand}" Header="Close" />
@@ -241,109 +240,24 @@
             prism:RegionManager.RegionName="ContentRegion"
             AnchorablesSource="{Binding Tools}"
             AutoHideDelay="0">
-            <DockingManager.LayoutItemTemplateSelector>
-                <vs2013Test:PanesTemplateSelector>
-                    <vs2013Test:PanesTemplateSelector.FileViewTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                                    <TextBox
-                                        Padding="2,4"
-                                        AcceptsReturn="True"
-                                        AcceptsTab="True"
-                                        Background="Transparent"
-                                        BorderThickness="0"
-                                        CaretBrush="{DynamicResource WindowForeground}"
-                                        FontFamily="Consolas"
-                                        Foreground="{DynamicResource WindowForeground}"
-                                        Text="{Binding TextContent, UpdateSourceTrigger=PropertyChanged}" />
-                                </ScrollViewer>
-                                <Rectangle
-                                    Width="17"
-                                    Height="17"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Bottom"
-                                    Fill="{DynamicResource ScrollViewerRectBackground}" />
-                            </Grid>
-                        </DataTemplate>
-                    </vs2013Test:PanesTemplateSelector.FileViewTemplate>
-                    <vs2013Test:PanesTemplateSelector.PropertiesViewTemplate>
-                        <DataTemplate>
-                            <Border />
-                        </DataTemplate>
-                    </vs2013Test:PanesTemplateSelector.PropertiesViewTemplate>
-                    <vs2013Test:PanesTemplateSelector.ExplorerViewTemplate>
-                        <DataTemplate>
-                            <Border />
-                        </DataTemplate>
-                    </vs2013Test:PanesTemplateSelector.ExplorerViewTemplate>
-                    <vs2013Test:PanesTemplateSelector.ErrorViewTemplate>
-                        <DataTemplate>
-                            <Border />
-                        </DataTemplate>
-                    </vs2013Test:PanesTemplateSelector.ErrorViewTemplate>
-                    <vs2013Test:PanesTemplateSelector.OutputViewTemplate>
-                        <DataTemplate>
-                            <Border />
-                        </DataTemplate>
-                    </vs2013Test:PanesTemplateSelector.OutputViewTemplate>
-                    <vs2013Test:PanesTemplateSelector.GitChangesViewTemplate>
-                        <DataTemplate>
-                            <Border />
-                        </DataTemplate>
-                    </vs2013Test:PanesTemplateSelector.GitChangesViewTemplate>
-                    <vs2013Test:PanesTemplateSelector.ToolboxViewTemplate>
-                        <DataTemplate>
-                            <Border />
-                        </DataTemplate>
-                    </vs2013Test:PanesTemplateSelector.ToolboxViewTemplate>
-                </vs2013Test:PanesTemplateSelector>
-            </DockingManager.LayoutItemTemplateSelector>
+			<LayoutRoot>
+					<LayoutPanel Orientation="Horizontal">
+						<LayoutPanel Orientation="Vertical">
+							<LayoutDocumentPane />
 
-            <DockingManager.LayoutItemContainerStyleSelector>
-                <vs2013Test:PanesStyleSelector>
-                    <vs2013Test:PanesStyleSelector.ToolStyle>
-                        <Style TargetType="{x:Type LayoutAnchorableItem}">
-                            <Setter Property="Title" Value="{Binding Model.Title}" />
-                            <Setter Property="CanHide" Value="True" />
-                            <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}" />
-                            <Setter Property="ContentId" Value="{Binding Model.ContentId}" />
-                            <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}" />
-                            <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}" />
-                        </Style>
-                    </vs2013Test:PanesStyleSelector.ToolStyle>
-                    <vs2013Test:PanesStyleSelector.FileStyle>
-                        <Style TargetType="{x:Type LayoutItem}">
-                            <Setter Property="Title" Value="{Binding Model.Title}" />
-                            <Setter Property="ToolTip" Value="{Binding Model.FilePath}" />
-                            <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
-                            <Setter Property="ContentId" Value="{Binding Model.ContentId}" />
-                        </Style>
-                    </vs2013Test:PanesStyleSelector.FileStyle>
-                </vs2013Test:PanesStyleSelector>
-            </DockingManager.LayoutItemContainerStyleSelector>
-            <DockingManager.LayoutUpdateStrategy>
-                <vs2013Test:LayoutInitializer />
-            </DockingManager.LayoutUpdateStrategy>
+							<LayoutAnchorablePaneGroup DockHeight="128" Orientation="Horizontal">
+								<LayoutAnchorablePane Name="ErrorsPane" />
+								<LayoutAnchorablePane Name="OutputPane" />
+							</LayoutAnchorablePaneGroup>
+						</LayoutPanel>
 
-            <LayoutRoot>
-                <LayoutPanel Orientation="Horizontal">
-                    <LayoutPanel Orientation="Vertical">
-                        <LayoutDocumentPane />
-
-                        <LayoutAnchorablePaneGroup DockHeight="128" Orientation="Horizontal">
-                            <LayoutAnchorablePane Name="ErrorsPane" />
-                            <LayoutAnchorablePane Name="OutputPane" />
-                        </LayoutAnchorablePaneGroup>
-                    </LayoutPanel>
-
-                    <LayoutAnchorablePaneGroup DockWidth="200" Orientation="Vertical">
-                        <LayoutAnchorablePane Name="ExplorerPane" DockHeight="2*" />
-                        <LayoutAnchorablePane Name="PropertiesPane" />
-                    </LayoutAnchorablePaneGroup>
-                </LayoutPanel>
-            </LayoutRoot>
-        </DockingManager>
+						<LayoutAnchorablePaneGroup DockWidth="200" Orientation="Vertical">
+							<LayoutAnchorablePane Name="ExplorerPane" DockHeight="2*" />
+							<LayoutAnchorablePane Name="PropertiesPane" />
+						</LayoutAnchorablePaneGroup>
+				</LayoutPanel>
+			</LayoutRoot>
+		</DockingManager>
 
         <Border Grid.Row="2" Background="{DynamicResource StatusBarBackground}">
             <Grid>

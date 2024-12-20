@@ -1,0 +1,18 @@
+<UserControl x:Class="Lan.AvalonDock.PrismTest.Views.Page2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+
+	<!--<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/namesspace;component/Styles.xaml"></ResourceDictionary>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>-->
+
+	<StackPanel>
+            <TextBox Text="this is page2"></TextBox>
+    </StackPanel>
+</UserControl>

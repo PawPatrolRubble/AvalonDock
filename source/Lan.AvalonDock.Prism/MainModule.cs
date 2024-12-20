@@ -19,6 +19,7 @@ namespace Lan.AvalonDock.PrismTest
 		{
 		
 			containerRegistry.RegisterForNavigation<FileViewA, FileViewAViewModel>();
+			containerRegistry.RegisterForNavigation<Page2, Page2ViewModel>();
 		}
 
 		public void OnInitialized(IContainerProvider containerProvider)

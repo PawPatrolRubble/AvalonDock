@@ -6,11 +6,12 @@ using System.Linq;
 
 namespace VS2013Test.ViewModels
 {
-	public class SolutionAViewModel : PaneViewModel
+	public class SolutionAViewModel : FileViewModel
 	{
 		public SolutionAViewModel()
 		{
 			Title= "Solution A";
+			//Name = nameof(SolutionAViewModel);
 		}
 	
 	}

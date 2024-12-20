@@ -96,7 +96,7 @@
                         <MenuItem Command="{Binding NewCommand}" Header="New" />
                         <MenuItem Command="{Binding OpenCommand}" Header="Open" />
                         <MenuItem Command="{Binding CommandNameCommand}" Header="Page2" />
-                        <MenuItem Command="{Binding CommandNameCommand}" Header="solution 2" />
+                        <MenuItem Command="{Binding GoToSolutionACommand}" Header="solution 2" />
                         <Separator />
                         <MenuItem Command="{Binding ActiveDocument.SaveCommand}" Header="Save" />
                         <MenuItem Command="{Binding ActiveDocument.SaveAsCommand}" Header="Save As..." />

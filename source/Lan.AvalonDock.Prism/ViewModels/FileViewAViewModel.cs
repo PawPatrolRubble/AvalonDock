@@ -9,6 +9,6 @@ namespace Lan.AvalonDock.PrismTest.ViewModels
 			
 		}
 
-		public string Title { get; } = "this is a tite";
+		public string Title { get; } = "this is a document title";
 	}
 }

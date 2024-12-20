@@ -51,7 +51,11 @@ namespace VS2013Test.ViewModels
 
 		private void GoToSolution(object obj)
 		{
-			
+			ContainerLocator.Current.Resolve<IRegionManager>().RequestNavigate("ContentRegion", nameof(SolutionA), navigationCallback:
+				s =>
+				{
+					;
+				});
 		}
 
 		#endregion constructors

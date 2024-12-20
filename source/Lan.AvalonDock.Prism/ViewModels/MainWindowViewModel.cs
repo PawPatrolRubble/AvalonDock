@@ -4,13 +4,16 @@ using System.Windows;
 using AvalonDock.Themes;
 using DryIoc;
 
+using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Regions;
 using VS2013Test.ViewModels;
 
 namespace Lan.AvalonDock.PrismTest.ViewModels
 {
 	public class MainWindowViewModel : BindableBase
 	{
+		private readonly IRegionManager _regionManager;
 		private string _title = "Prism Application";
 		private Tuple<string, Theme> _selectedTheme;
 		private FileViewModel _activeDocument;
@@ -145,9 +148,21 @@ namespace Lan.AvalonDock.PrismTest.ViewModels
 			}
 		}
 
-		public MainWindowViewModel()
-		{
 
+		public DelegateCommand<object> GoToCommand { get; }
+
+		private void GoTo(object pageName)
+		{
+			if (pageName is string viewName)
+			{
+				_regionManager.RequestNavigate("ContentRegion", viewName);
+			}
+		}
+
+		public MainWindowViewModel(IRegionManager regionManager)
+		{
+			_regionManager = regionManager;
+			GoToCommand = new DelegateCommand<object>(GoTo);
 		}
 	}
 }

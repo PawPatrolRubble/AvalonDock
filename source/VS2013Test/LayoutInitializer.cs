@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using System.Windows;
 using AvalonDock.Layout;
 using VS2013Test.ViewModels;
 
@@ -85,6 +87,7 @@ namespace VS2013Test
 
 		public bool BeforeInsertDocument(LayoutRoot layout, LayoutDocument anchorableToShow, ILayoutContainer destinationContainer)
 		{
+		
 			return false;
 		}
 
