@@ -45,7 +45,13 @@ namespace VS2013Test.ViewModels
 			SelectedTheme = Themes.First();
 			DockingNavigationService = ContainerLocator.Current.Resolve<IDockingNavigationService>();
 			CommandNameCommand = new RelayCommand(CommandName);
+			GoToSolutionACommand = new RelayCommand(GoToSolution);
 
+		}
+
+		private void GoToSolution(object obj)
+		{
+			
 		}
 
 		#endregion constructors
@@ -144,7 +150,12 @@ namespace VS2013Test.ViewModels
 
 				return _toolbox;
 			}
+
 		}
+
+
+		public ICommand GoToSolutionACommand { get; }
+
 
 		public ICommand CommandNameCommand { get; }
 

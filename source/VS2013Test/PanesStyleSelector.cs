@@ -18,6 +18,9 @@ namespace VS2013Test
 			set;
 		}
 
+
+		public Style MyDocumentStyle { get; set; }
+
 		public override Style SelectStyle(object item, DependencyObject container)
 		{
 			if (item is ToolViewModel)
@@ -25,6 +28,12 @@ namespace VS2013Test
 
 			if (item is FileViewModel)
 				return FileStyle;
+
+
+			if (item is FrameworkElement page && page.DataContext.GetType().IsAssignableTo(typeof(FileViewModel)))
+			{
+				return MyDocumentStyle;
+			}
 
 			return base.SelectStyle(item, container);
 		}

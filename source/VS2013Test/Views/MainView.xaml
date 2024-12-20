@@ -96,6 +96,7 @@
                         <MenuItem Command="{Binding NewCommand}" Header="New" />
                         <MenuItem Command="{Binding OpenCommand}" Header="Open" />
                         <MenuItem Command="{Binding CommandNameCommand}" Header="Page2" />
+                        <MenuItem Command="{Binding CommandNameCommand}" Header="solution 2" />
                         <Separator />
                         <MenuItem Command="{Binding ActiveDocument.SaveCommand}" Header="Save" />
                         <MenuItem Command="{Binding ActiveDocument.SaveAsCommand}" Header="Save As..." />
@@ -329,6 +330,14 @@
                             <Setter Property="ContentId" Value="{Binding Model.DataContext.ContentId}" />
                         </Style>
                     </vs2013Test:PanesStyleSelector.FileStyle>
+
+
+					<vs2013Test:PanesStyleSelector.MyDocumentStyle>
+						<Style TargetType="LayoutDocumentItem">
+							<Setter Property="Title" Value="{Binding Model.DataContext.Title}" />
+						</Style>
+					</vs2013Test:PanesStyleSelector.MyDocumentStyle>
+
                 </vs2013Test:PanesStyleSelector>
             </DockingManager.LayoutItemContainerStyleSelector>
             <DockingManager.LayoutUpdateStrategy>

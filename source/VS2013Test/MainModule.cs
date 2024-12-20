@@ -20,6 +20,7 @@ namespace VS2013Test
 
 			containerRegistry.RegisterForNavigation<FileViewA, FileViewAViewModel>();
 			containerRegistry.RegisterForNavigation<Page2, Page2ViewModel>();
+			containerRegistry.RegisterForNavigation<SolutionA, SolutionAViewModel>();
 		}
 
 		public void OnInitialized(IContainerProvider containerProvider)
