@@ -99,9 +99,9 @@
                         <MenuItem Command="{Binding GoToCommand}" CommandParameter="FileViewA" Header="Open" />
                         <Separator />
                         <MenuItem Command="{Binding GoToCommand}" CommandParameter="Page2" Header="Page 2" />
-                        <MenuItem Command="{Binding ActiveDocument.SaveAsCommand}" Header="Save As..." />
+                        <MenuItem Command="{Binding GoToCommand}" CommandParameter="Bottom2" Header="b 2" />
+                        <MenuItem Command="{Binding GoToCommand}" CommandParameter="ContentBottom" Header="bottom1" />
                         <Separator />
-                        <MenuItem Command="{Binding ActiveDocument.CloseCommand}" Header="Close" />
                     </MenuItem>
 
                     <MenuItem Header="View">

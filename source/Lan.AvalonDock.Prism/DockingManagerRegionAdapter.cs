@@ -90,6 +90,10 @@ namespace Lan.AvalonDock.PrismTest
 						LayoutAnchorablePane solutionPane =
 							(LayoutAnchorablePane)((LayoutAnchorablePaneGroup)regionTarget.Layout.RootPanel.Children.FirstOrDefault(x =>
 								x.GetType() == typeof(LayoutAnchorablePaneGroup))).Children[0];
+						
+						LayoutAnchorablePane bottomPane =
+							(LayoutAnchorablePane)((LayoutAnchorablePaneGroup)((LayoutPanel)
+								regionTarget.Layout.RootPanel.Children[0]).Children[1]).Children[0];
 
 
 						if (viewModel.GetType().IsAssignableTo(typeof(IToolViewModel)))
@@ -109,7 +113,19 @@ namespace Lan.AvalonDock.PrismTest
 								Content = item
 							});
 						}
+
+						if (viewModel.GetType().IsAssignableTo(typeof(IBottomViewModel)))
+						{
+							bottomPane.Children.Add(new LayoutAnchorable()
+							{
+								Content = item,
+								Title = viewModel.Title
+							});
+
+						}
 					
+
+
 
 
 

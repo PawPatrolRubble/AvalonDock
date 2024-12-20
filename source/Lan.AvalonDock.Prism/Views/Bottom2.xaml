@@ -1,0 +1,9 @@
+<UserControl x:Class="Lan.AvalonDock.PrismTest.Views.Bottom2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+	    <Button Content="content2" Command="{Binding command}" />
+    </Grid>
+</UserControl>
