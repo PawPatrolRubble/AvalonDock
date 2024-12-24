@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 using System;
 using System.Collections.Specialized;
@@ -28,22 +29,41 @@ namespace Lan.AvalonDock.PrismTest
 		protected override void Adapt(IRegion region, DockingManager regionTarget)
 		{
 			region.Views.CollectionChanged += delegate (
-				Object sender, NotifyCollectionChangedEventArgs e)
+				object sender, NotifyCollectionChangedEventArgs e)
 			{
-				this.OnViewsCollectionChanged(sender, e, region, regionTarget);
+				OnViewsCollectionChanged(sender, e, region, regionTarget);
 			};
 
+
 			regionTarget.DocumentClosed += delegate (
-							Object sender, DocumentClosedEventArgs e)
+							object sender, DocumentClosedEventArgs e)
 			{
-				this.OnDocumentClosedEventArgs(sender, e, region);
+				OnDocumentClosedEventArgs(sender, e, region);
 			};
+
+
+			regionTarget.LayoutFloatingWindowControlClosed += (s, e) =>
+			{
+				;
+			};
+
+
+			regionTarget.AnchorableClosed += (s, e) =>
+			{
+				OnAnchorableClosed(s, e, region);
+			};
+
 		}
 
 		#endregion  //Overrides
 
 
 		#region Event Handlers
+
+
+		private LayoutDocumentPane? _documentPane;
+		private LayoutAnchorablePane? _solutionPane;
+		private LayoutAnchorablePane? _bottomPane;
 
 		/// <summary>
 		/// Handles the NotifyCollectionChangedEventArgs event.
@@ -84,21 +104,31 @@ namespace Lan.AvalonDock.PrismTest
 						//a simple LayoutDocumentPane or a LayoutDocumentPaneGroup
 						//ILayoutDocumentPane currentILayoutDocumentPane = (ILayoutDocumentPane)regionTarget.Layout.RootPanel.Children.OfType<ILayoutControl>();
 
-						LayoutDocumentPane documentPane = (LayoutDocumentPane)((LayoutPanel)
-							regionTarget.Layout.RootPanel.Children[0]).Children[0]; 
+						_documentPane ??= (LayoutDocumentPane)((LayoutPanel)
+							regionTarget.Layout.RootPanel.Children[0]).Children[0];
 
-						LayoutAnchorablePane solutionPane =
+
+						_documentPane.ShowHeader = true;
+
+						_solutionPane ??=
 							(LayoutAnchorablePane)((LayoutAnchorablePaneGroup)regionTarget.Layout.RootPanel.Children.FirstOrDefault(x =>
 								x.GetType() == typeof(LayoutAnchorablePaneGroup))).Children[0];
-						
-						LayoutAnchorablePane bottomPane =
-							(LayoutAnchorablePane)((LayoutAnchorablePaneGroup)((LayoutPanel)
-								regionTarget.Layout.RootPanel.Children[0]).Children[1]).Children[0];
 
+						if (_solutionPane != null)
+						{
+							_solutionPane.ChildrenCollectionChanged += delegate(object o, EventArgs args)
+							{
+								;
+							};
+
+						}
+
+
+						_bottomPane ??= (LayoutAnchorablePane)((LayoutAnchorablePaneGroup)((LayoutPanel)regionTarget.Layout.RootPanel.Children[0]).Children[1]).Children[0];
 
 						if (viewModel.GetType().IsAssignableTo(typeof(IToolViewModel)))
 						{
-							solutionPane.Children.Add(new LayoutAnchorable()
+							_solutionPane.Children.Add(new LayoutAnchorable()
 							{
 								Content = item,
 								Title = viewModel.Title,
@@ -107,7 +137,7 @@ namespace Lan.AvalonDock.PrismTest
 
 						if (viewModel.GetType().IsAssignableTo(typeof(IDocumentViewModel)))
 						{
-							documentPane.Children.Add(new LayoutDocument()
+							_documentPane.Children.Add(new LayoutDocument()
 							{
 								Title = viewModel.Title,
 								Content = item
@@ -116,18 +146,13 @@ namespace Lan.AvalonDock.PrismTest
 
 						if (viewModel.GetType().IsAssignableTo(typeof(IBottomViewModel)))
 						{
-							bottomPane.Children.Add(new LayoutAnchorable()
+							_bottomPane.Children.Add(new LayoutAnchorable()
 							{
 								Content = item,
 								Title = viewModel.Title
 							});
 
 						}
-					
-
-
-
-
 
 						//if (currentILayoutDocumentPane.GetType() == typeof(LayoutDocumentPaneGroup))
 						//{
@@ -184,6 +209,12 @@ namespace Lan.AvalonDock.PrismTest
 		void OnDocumentClosedEventArgs(object sender, DocumentClosedEventArgs e, IRegion region)
 		{
 			region.Remove(e.Document.Content);
+		}
+
+
+		private void OnAnchorableClosed(object sender, AnchorableClosedEventArgs args, IRegion region)
+		{
+			region.Remove(args.Anchorable);
 		}
 
 		#endregion  //Event handlers

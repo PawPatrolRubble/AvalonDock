@@ -240,6 +240,39 @@
             prism:RegionManager.RegionName="ContentRegion"
             AnchorablesSource="{Binding Tools}"
             AutoHideDelay="0">
+
+	        <DockingManager.LayoutItemContainerStyleSelector>
+		        <vs2013Test:PanesStyleSelector>
+			        <vs2013Test:PanesStyleSelector.ToolStyle>
+				        <Style TargetType="{x:Type LayoutAnchorableItem}">
+					        <Setter Property="Title" Value="{Binding Model.Title}" />
+					        <Setter Property="CanHide" Value="True" />
+					        <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}" />
+					        <Setter Property="ContentId" Value="{Binding Model.ContentId}" />
+					        <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}" />
+					        <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}" />
+				        </Style>
+			        </vs2013Test:PanesStyleSelector.ToolStyle>
+			        <vs2013Test:PanesStyleSelector.FileStyle>
+				        <Style TargetType="{x:Type LayoutItem}">
+					        <Setter Property="Title" Value="{Binding .Model.Title}" />
+					        <Setter Property="ToolTip" Value="{Binding Model.FilePath}" />
+					        <Setter Property="CloseCommand" Value="{Binding Model.DataContext.CloseCommand}" />
+					        <Setter Property="ContentId" Value="{Binding Model.DataContext.ContentId}" />
+				        </Style>
+			        </vs2013Test:PanesStyleSelector.FileStyle>
+
+
+			        <vs2013Test:PanesStyleSelector.MyDocumentStyle>
+				        <Style TargetType="LayoutDocumentItem">
+					        <Setter Property="Title" Value="{Binding Model.DataContext.Title}" />
+				        </Style>
+			        </vs2013Test:PanesStyleSelector.MyDocumentStyle>
+
+		        </vs2013Test:PanesStyleSelector>
+	        </DockingManager.LayoutItemContainerStyleSelector>
+
+
 			<LayoutRoot>
 					<LayoutPanel Orientation="Horizontal">
 						<LayoutPanel Orientation="Vertical">
