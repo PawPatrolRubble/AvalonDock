@@ -12,7 +12,8 @@ namespace Lan.Ui.DockableApp.ViewModels
 	{
 		public B1ViewModel()
 		{
-
+			Title = "test bootm";
+			CanClose = true;
 		}
 	}
 }

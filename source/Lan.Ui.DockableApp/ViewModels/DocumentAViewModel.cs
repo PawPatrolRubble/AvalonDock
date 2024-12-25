@@ -13,6 +13,7 @@ namespace Lan.Ui.DockableApp.ViewModels
 		public DocumentAViewModel()
 		{
 			Title = "test";
+			CanClose = true;
 		}
 	}
 }
