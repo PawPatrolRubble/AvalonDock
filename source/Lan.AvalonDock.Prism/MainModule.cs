@@ -22,6 +22,7 @@ namespace Lan.AvalonDock.PrismTest
 			containerRegistry.RegisterForNavigation<Page2, Page2ViewModel>();
 			containerRegistry.RegisterForNavigation<Bottom2, Bottom2ViewModel>();
 			containerRegistry.RegisterForNavigation<ContentBottom, ContentBottomViewModel>();
+			containerRegistry.RegisterForNavigation<View2, View2ViewModel>();
 			//containerRegistry.RegisterForNavigation<Page2, Page2ViewModel>();
 		}
 

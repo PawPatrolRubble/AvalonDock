@@ -6,9 +6,10 @@ namespace Lan.AvalonDock.PrismTest.ViewModels
 	{
 		public FileViewAViewModel()
 		{
-			
+			CanClose = false;
 		}
 
 		public string Title { get; } = "this is a document title";
+		public bool CanClose { get; }
 	}
 }

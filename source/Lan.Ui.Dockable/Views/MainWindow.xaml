@@ -1,13 +1,12 @@
 <Window
-    x:Class="Lan.AvalonDock.PrismTest.Views.MainWindow"
+    x:Class="Lan.Ui.Dockable.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:icons="clr-namespace:VS2013Test.Icons;assembly=VS2013Test"
+    xmlns:dockable="clr-namespace:Lan.Ui.Dockable"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
-    xmlns:viewModels="clr-namespace:Lan.AvalonDock.PrismTest.ViewModels"
-    xmlns:vs2013Test="clr-namespace:VS2013Test;assembly=VS2013Test"
+    xmlns:viewModels="clr-namespace:Lan.Ui.Dockable.ViewModels"
     Title="{Binding Title}"
     Width="1600"
     Height="900"
@@ -26,6 +25,15 @@
     StateChanged="WindowStateChanged"
     WindowStyle="None"
     mc:Ignorable="d">
+
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Lan.Ui.Dockable;component/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
 
     <WindowChrome.WindowChrome>
@@ -77,31 +85,41 @@
                 Margin="8,4"
                 HorizontalAlignment="Left"
                 Orientation="Horizontal">
-                <icons:VisualStudioIcon Height="20" Margin="4,0">
-                    <UserControl.Style>
-                        <Style TargetType="{x:Type UserControl}">
-                            <Setter Property="Foreground" Value="{DynamicResource IconBrush}" />
 
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsActive, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Value="False">
-                                    <Setter Property="Foreground" Value="{DynamicResource IconInactiveBrush}" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </UserControl.Style>
-                </icons:VisualStudioIcon>
+                <Path
+                    Width="16"
+                    Height="16"
+                    Data="{StaticResource Leaf}"
+                    Stroke="Red"
+                    StrokeThickness="1" />
+
 
                 <Menu
                     VerticalAlignment="Center"
                     Style="{DynamicResource MetroMenu}"
                     WindowChrome.IsHitTestVisibleInChrome="True">
                     <MenuItem Header="File">
-						<MenuItem Command="{Binding GoToCommand}" CommandParameter="FileViewA" Header="FileViewA" />
-                        <MenuItem Command="{Binding GoToCommand}" CommandParameter="View2" Header="view2" />
+                        <MenuItem
+                            Command="{Binding GoToCommand}"
+                            CommandParameter="FileViewA"
+                            Header="FileViewA" />
+                        <MenuItem
+                            Command="{Binding GoToCommand}"
+                            CommandParameter="View2"
+                            Header="view2" />
                         <Separator />
-                        <MenuItem Command="{Binding GoToCommand}" CommandParameter="Page2" Header="Page 2" />
-                        <MenuItem Command="{Binding GoToCommand}" CommandParameter="Bottom2" Header="b 2" />
-                        <MenuItem Command="{Binding GoToCommand}" CommandParameter="ContentBottom" Header="bottom1" />
+                        <MenuItem
+                            Command="{Binding GoToCommand}"
+                            CommandParameter="Page2"
+                            Header="Page 2" />
+                        <MenuItem
+                            Command="{Binding GoToCommand}"
+                            CommandParameter="Bottom2"
+                            Header="b 2" />
+                        <MenuItem
+                            Command="{Binding GoToCommand}"
+                            CommandParameter="ContentBottom"
+                            Header="bottom1" />
                         <Separator />
                     </MenuItem>
 
@@ -242,56 +260,56 @@
             AnchorablesSource="{Binding Tools}"
             AutoHideDelay="0">
 
-	        <DockingManager.LayoutItemContainerStyleSelector>
-		        <vs2013Test:PanesStyleSelector>
-			        <vs2013Test:PanesStyleSelector.ToolStyle>
-				        <Style TargetType="{x:Type LayoutAnchorableItem}">
-					        <Setter Property="Title" Value="{Binding Model.Title}" />
-					        <Setter Property="CanHide" Value="False" />
-					        <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}" />
-					        <Setter Property="ContentId" Value="{Binding Model.ContentId}" />
-					        <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}" />
-					        <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}" />
-				        </Style>
-			        </vs2013Test:PanesStyleSelector.ToolStyle>
-			        <vs2013Test:PanesStyleSelector.FileStyle>
-				        <Style TargetType="{x:Type LayoutItem}">
-					        <Setter Property="Title" Value="{Binding .Model.Title}" />
-					        <Setter Property="ToolTip" Value="{Binding Model.FilePath}" />
-					        <Setter Property="CloseCommand" Value="{Binding Model.DataContext.CloseCommand}" />
-					        <Setter Property="ContentId" Value="{Binding Model.DataContext.ContentId}" />
-				        </Style>
-			        </vs2013Test:PanesStyleSelector.FileStyle>
+            <DockingManager.LayoutItemContainerStyleSelector>
+                <dockable:PanesStyleSelector>
+                    <dockable:PanesStyleSelector.ToolStyle>
+                        <Style TargetType="{x:Type LayoutAnchorableItem}">
+                            <Setter Property="Title" Value="{Binding Model.Title}" />
+                            <Setter Property="CanHide" Value="False" />
+                            <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}" />
+                            <Setter Property="ContentId" Value="{Binding Model.ContentId}" />
+                            <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}" />
+                            <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}" />
+                        </Style>
+                    </dockable:PanesStyleSelector.ToolStyle>
+                    <dockable:PanesStyleSelector.FileStyle>
+                        <Style TargetType="{x:Type LayoutItem}">
+                            <Setter Property="Title" Value="{Binding .Model.Title}" />
+                            <Setter Property="ToolTip" Value="{Binding Model.FilePath}" />
+                            <Setter Property="CloseCommand" Value="{Binding Model.DataContext.CloseCommand}" />
+                            <Setter Property="ContentId" Value="{Binding Model.DataContext.ContentId}" />
+                        </Style>
+                    </dockable:PanesStyleSelector.FileStyle>
 
 
-			        <vs2013Test:PanesStyleSelector.MyDocumentStyle>
-				        <Style TargetType="LayoutDocumentItem">
-					        <Setter Property="Title" Value="{Binding Model.DataContext.Title}" />
-				        </Style>
-			        </vs2013Test:PanesStyleSelector.MyDocumentStyle>
+                    <dockable:PanesStyleSelector.MyDocumentStyle>
+                        <Style TargetType="LayoutDocumentItem">
+                            <Setter Property="Title" Value="{Binding Model.DataContext.Title}" />
+                        </Style>
+                    </dockable:PanesStyleSelector.MyDocumentStyle>
 
-		        </vs2013Test:PanesStyleSelector>
-	        </DockingManager.LayoutItemContainerStyleSelector>
+                </dockable:PanesStyleSelector>
+            </DockingManager.LayoutItemContainerStyleSelector>
 
 
-			<LayoutRoot>
-					<LayoutPanel Orientation="Horizontal">
-						<LayoutPanel Orientation="Vertical">
-							<LayoutDocumentPane />
+            <LayoutRoot>
+                <LayoutPanel Orientation="Horizontal">
+                    <LayoutPanel Orientation="Vertical">
+                        <LayoutDocumentPane />
 
-							<LayoutAnchorablePaneGroup DockHeight="128" Orientation="Horizontal">
-								<LayoutAnchorablePane Name="ErrorsPane" />
-								<LayoutAnchorablePane Name="OutputPane" />
-							</LayoutAnchorablePaneGroup>
-						</LayoutPanel>
+                        <LayoutAnchorablePaneGroup DockHeight="128" Orientation="Horizontal">
+                            <LayoutAnchorablePane Name="ErrorsPane" />
+                            <LayoutAnchorablePane Name="OutputPane" />
+                        </LayoutAnchorablePaneGroup>
+                    </LayoutPanel>
 
-						<LayoutAnchorablePaneGroup DockWidth="200" Orientation="Vertical">
-							<LayoutAnchorablePane Name="ExplorerPane" DockHeight="2*" />
-							<LayoutAnchorablePane Name="PropertiesPane" />
-						</LayoutAnchorablePaneGroup>
-				</LayoutPanel>
-			</LayoutRoot>
-		</DockingManager>
+                    <LayoutAnchorablePaneGroup DockWidth="200" Orientation="Vertical">
+                        <LayoutAnchorablePane Name="ExplorerPane" DockHeight="2*" />
+                        <LayoutAnchorablePane Name="PropertiesPane" />
+                    </LayoutAnchorablePaneGroup>
+                </LayoutPanel>
+            </LayoutRoot>
+        </DockingManager>
 
         <Border Grid.Row="2" Background="{DynamicResource StatusBarBackground}">
             <Grid>

@@ -1,16 +1,18 @@
 #nullable enable
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
+
 using AvalonDock;
 using AvalonDock.Layout;
-using ImTools;
-using Lan.AvalonDock.PrismTest.ViewModels;
+
+using Lan.Ui.Dockable.Models;
+
 using Prism.Regions;
 
-namespace Lan.AvalonDock.PrismTest
+namespace Lan.Ui.Dockable
 {
 	public class DockingManagerRegionAdapter : RegionAdapterBase<DockingManager>
 	{
@@ -57,7 +59,7 @@ namespace Lan.AvalonDock.PrismTest
 			{
 				;
 			};
-			
+
 		}
 
 		#endregion  //Overrides
@@ -81,91 +83,61 @@ namespace Lan.AvalonDock.PrismTest
 		{
 			if (e.Action == NotifyCollectionChangedAction.Add)
 			{
-				foreach (FrameworkElement item in e.NewItems)
+				foreach (FrameworkElement view in e.NewItems)
 				{
-					UIElement view = item as UIElement;
 
 					if (view != null)
 					{
-						//Create a new layout document to be included in the LayoutDocuemntPane (defined in xaml)
-						LayoutDocument newLayoutDocument = new LayoutDocument();
-						//Set the content of the LayoutDocument
-						newLayoutDocument.Content = item;
-
-						var viewModel = (IDockable)item.DataContext;
-
-						if (viewModel != null)
-						{
-							//All my viewmodels have properties DisplayName and IconKey
-							newLayoutDocument.Title = viewModel.Title;
-							//GetImageUri is custom made method which gets the icon for the LayoutDocument
-							//newLayoutDocument.IconSource = this.GetImageUri(viewModel.IconKey);
-						}
-
-						//Store all LayoutDocuments already pertaining to the LayoutDocumentPane (defined in xaml)
-						List<LayoutDocument> oldLayoutDocuments = new List<LayoutDocument>();
-
-						//Get the current ILayoutDocumentPane ... Depending on the arrangement of the views this can be either 
-						//a simple LayoutDocumentPane or a LayoutDocumentPaneGroup
-						//ILayoutDocumentPane currentILayoutDocumentPane = (ILayoutDocumentPane)regionTarget.Layout.RootPanel.Children.OfType<ILayoutControl>();
 
 						_documentPane ??= (LayoutDocumentPane)((LayoutPanel)
 							regionTarget.Layout.RootPanel.Children[0]).Children[0];
 
-
 						_documentPane.ShowHeader = true;
 
+						_solutionPane ??=
+							(LayoutAnchorablePane)((LayoutAnchorablePaneGroup)regionTarget.Layout.RootPanel.Children.FirstOrDefault(x =>
+								x.GetType() == typeof(LayoutAnchorablePaneGroup))).Children[0];
 
-						if (_solutionPane == null)
+						_bottomPane ??=
+							(LayoutAnchorablePane)
+							((LayoutAnchorablePaneGroup)((LayoutPanel)regionTarget.Layout.RootPanel.Children[0]).Children[1])
+							.Children[0];
+
+
+						switch (view.DataContext)
 						{
-							_solutionPane = (LayoutAnchorablePane)((LayoutAnchorablePaneGroup)regionTarget.Layout.RootPanel.Children.FirstOrDefault(x => x.GetType() == typeof(LayoutAnchorablePaneGroup))).Children[0];
+							case RightPaneViewModel toolViewModel:
+								_solutionPane.Children.Add(new LayoutAnchorable()
+								{
+									Content = view,
+									Title = toolViewModel.Title,
+								});
+								break;
+							case DocumentViewModel documentViewModel:
 
-							_solutionPane.ChildrenCollectionChanged += delegate (object o, EventArgs args)
-							{
-								;
-							};
+								_documentPane.Children.Add(new LayoutDocument()
+								{
+									Title = documentViewModel.Title,
+									Content = view,
+									CanClose = documentViewModel.CanClose,
+								});
+								break;
+
+							case BottomViewModel bottomViewModel:
+
+								_bottomPane.Children.Add(new LayoutAnchorable()
+								{
+									Content = view,
+									Title = bottomViewModel.Title,
+									CanHide = false
+								});
+								break;
+
 						}
 
-						if (_bottomPane == null)
-						{
-							_bottomPane ??= (LayoutAnchorablePane)((LayoutAnchorablePaneGroup)((LayoutPanel)regionTarget.Layout.RootPanel.Children[0]).Children[1]).Children[0];
-							_bottomPane.ChildrenCollectionChanged += (s, e) =>
-							{
-								;
-							};
-						}
 
 
 
-						if (viewModel.GetType().IsAssignableTo(typeof(IToolViewModel)))
-						{
-							_solutionPane.Children.Add(new LayoutAnchorable()
-							{
-								Content = item,
-								Title = viewModel.Title,
-							});
-						}
-
-						if (viewModel is IDocumentViewModel documentViewModel)
-						{
-							_documentPane.Children.Add(new LayoutDocument()
-							{
-								Title = documentViewModel.Title,
-								Content = item,
-								CanClose = documentViewModel.CanClose,
-							});
-						}
-
-						if (viewModel.GetType().IsAssignableTo(typeof(IBottomViewModel)))
-						{
-							_bottomPane.Children.Add(new LayoutAnchorable()
-							{
-								Content = item,
-								Title = viewModel.Title,
-								CanHide = false
-							});
-
-						}
 
 						//if (currentILayoutDocumentPane.GetType() == typeof(LayoutDocumentPaneGroup))
 						//{
