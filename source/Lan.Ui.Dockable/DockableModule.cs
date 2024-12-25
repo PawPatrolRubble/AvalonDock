@@ -14,7 +14,6 @@ namespace Lan.Ui.Dockable
 
 		public void RegisterTypes(IContainerRegistry containerRegistry)
 		{
-
 		}
 	}
 }

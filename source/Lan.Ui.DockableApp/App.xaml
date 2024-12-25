@@ -1,8 +1,16 @@
-﻿<prism:PrismApplication
+<prism:PrismApplication
     x:Class="Lan.Ui.DockableApp.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Lan.Ui.DockableApp"
     xmlns:prism="http://prismlibrary.com/">
-    <Application.Resources />
+	<Application.Resources >
+
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/Lan.Ui.Dockable;component/Themes/Styles.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+
+	</Application.Resources>
 </prism:PrismApplication>

@@ -16,9 +16,15 @@ namespace Lan.Ui.Dockable
 {
 	public class DockingManagerRegionAdapter : RegionAdapterBase<DockingManager>
 	{
-		public DockingManagerRegionAdapter(IRegionBehaviorFactory regionBehaviorFactory)
+		private readonly IDockableMainViewContentProvider _dockableMainViewContentProvider;
+
+		public DockingManagerRegionAdapter(IRegionBehaviorFactory regionBehaviorFactory, IDockableMainViewContentProvider dockableMainViewContentProvider)
 			: base(regionBehaviorFactory)
 		{
+			_dockableMainViewContentProvider = dockableMainViewContentProvider;
+			_documentPane = _dockableMainViewContentProvider.DocumentPane;
+			_bottomPane = _dockableMainViewContentProvider.BottomPane;
+			_solutionPane = _dockableMainViewContentProvider.RightPane;
 		}
 
 		#region Overrides
@@ -88,21 +94,6 @@ namespace Lan.Ui.Dockable
 
 					if (view != null)
 					{
-
-						_documentPane ??= (LayoutDocumentPane)((LayoutPanel)
-							regionTarget.Layout.RootPanel.Children[0]).Children[0];
-
-						_documentPane.ShowHeader = true;
-
-						_solutionPane ??=
-							(LayoutAnchorablePane)((LayoutAnchorablePaneGroup)regionTarget.Layout.RootPanel.Children.FirstOrDefault(x =>
-								x.GetType() == typeof(LayoutAnchorablePaneGroup))).Children[0];
-
-						_bottomPane ??=
-							(LayoutAnchorablePane)
-							((LayoutAnchorablePaneGroup)((LayoutPanel)regionTarget.Layout.RootPanel.Children[0]).Children[1])
-							.Children[0];
-
 
 						switch (view.DataContext)
 						{

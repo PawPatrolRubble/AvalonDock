@@ -10,8 +10,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Lan.Ui.Dockable\Lan.Ui.Dockable.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
-  </ItemGroup>
 </Project>

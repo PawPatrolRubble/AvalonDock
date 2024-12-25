@@ -30,8 +30,12 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Lan.Ui.Dockable;component/Styles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Lan.Ui.Dockable;component/Themes/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="MenuItemDefault" TargetType="MenuItem">
+                <Setter Property="Foreground" Value="{DynamicResource WindowForeground}" />
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -89,71 +93,23 @@
                 <Path
                     Width="16"
                     Height="16"
+					Margin="5 0"
                     Data="{StaticResource Leaf}"
-                    Stroke="Red"
+                    Stretch="Uniform"
+                    Stroke="{DynamicResource WindowForeground}"
                     StrokeThickness="1" />
 
 
-                <Menu
-                    VerticalAlignment="Center"
-                    Style="{DynamicResource MetroMenu}"
-                    WindowChrome.IsHitTestVisibleInChrome="True">
-                    <MenuItem Header="File">
-                        <MenuItem
-                            Command="{Binding GoToCommand}"
-                            CommandParameter="FileViewA"
-                            Header="FileViewA" />
-                        <MenuItem
-                            Command="{Binding GoToCommand}"
-                            CommandParameter="View2"
-                            Header="view2" />
-                        <Separator />
-                        <MenuItem
-                            Command="{Binding GoToCommand}"
-                            CommandParameter="Page2"
-                            Header="Page 2" />
-                        <MenuItem
-                            Command="{Binding GoToCommand}"
-                            CommandParameter="Bottom2"
-                            Header="b 2" />
-                        <MenuItem
-                            Command="{Binding GoToCommand}"
-                            CommandParameter="ContentBottom"
-                            Header="bottom1" />
-                        <Separator />
-                    </MenuItem>
-
-                    <MenuItem Header="View">
-                        <MenuItem
-                            Header="SolutionExplorer"
-                            IsCheckable="True"
-                            IsChecked="{Binding Explorer.IsVisible, Mode=TwoWay}" />
-                        <MenuItem
-                            Header="Properties"
-                            IsCheckable="True"
-                            IsChecked="{Binding Props.IsVisible, Mode=TwoWay}" />
-                        <MenuItem
-                            Header="Error List"
-                            IsCheckable="True"
-                            IsChecked="{Binding Errors.IsVisible, Mode=TwoWay}" />
-                        <MenuItem
-                            Header="Output"
-                            IsCheckable="True"
-                            IsChecked="{Binding Output.IsVisible, Mode=TwoWay}" />
-                        <MenuItem
-                            Header="Git Changes"
-                            IsCheckable="True"
-                            IsChecked="{Binding Git.IsVisible, Mode=TwoWay}" />
-                        <MenuItem
-                            Header="Toolbox"
-                            IsCheckable="True"
-                            IsChecked="{Binding Toolbox.IsVisible, Mode=TwoWay}" />
-                    </MenuItem>
+                <Menu 
+					ItemsSource="{Binding DockableMainViewContentProvider.Menus}"
+	                VerticalAlignment="Center" WindowChrome.IsHitTestVisibleInChrome="True">
+                   
                 </Menu>
 
                 <ComboBox
                     Margin="4,0"
                     DisplayMemberPath="Item1"
+					Width="150"
                     ItemsSource="{Binding Themes}"
                     SelectedItem="{Binding SelectedTheme}"
                     WindowChrome.IsHitTestVisibleInChrome="True" />
@@ -181,69 +137,7 @@
             </StackPanel>
 
             <StackPanel
-                Grid.Row="2"
-                HorizontalAlignment="Left"
-                Orientation="Vertical">
-                <Rectangle
-                    Width="5"
-                    Height="17"
-                    Margin="12,1"
-                    RenderOptions.BitmapScalingMode="NearestNeighbor"
-                    UseLayoutRounding="True">
-                    <Rectangle.Fill>
-                        <DrawingBrush
-                            TileMode="Tile"
-                            Viewbox="0,0,4,4"
-                            ViewboxUnits="Absolute"
-                            Viewport="0,0,4,4"
-                            ViewportUnits="Absolute">
-                            <DrawingBrush.Drawing>
-                                <GeometryDrawing Brush="{DynamicResource ToolBarGripper}">
-                                    <GeometryDrawing.Geometry>
-                                        <GeometryGroup>
-                                            <GeometryGroup.Children>
-                                                <RectangleGeometry Rect="0,0,1,1" />
-                                                <RectangleGeometry Rect="2,2,1,1" />
-                                            </GeometryGroup.Children>
-                                        </GeometryGroup>
-                                    </GeometryDrawing.Geometry>
-                                </GeometryDrawing>
-                            </DrawingBrush.Drawing>
-                        </DrawingBrush>
-                    </Rectangle.Fill>
-                </Rectangle>
-
-                <Rectangle
-                    Width="5"
-                    Height="17"
-                    Margin="12,8,12,11"
-                    RenderOptions.BitmapScalingMode="NearestNeighbor"
-                    UseLayoutRounding="True">
-                    <Rectangle.Fill>
-                        <DrawingBrush
-                            TileMode="Tile"
-                            Viewbox="0,0,4,4"
-                            ViewboxUnits="Absolute"
-                            Viewport="0,0,4,4"
-                            ViewportUnits="Absolute">
-                            <DrawingBrush.Drawing>
-                                <GeometryDrawing Brush="{DynamicResource ToolBarGripper}">
-                                    <GeometryDrawing.Geometry>
-                                        <GeometryGroup>
-                                            <GeometryGroup.Children>
-                                                <RectangleGeometry Rect="0,0,1,1" />
-                                                <RectangleGeometry Rect="2,2,1,1" />
-                                            </GeometryGroup.Children>
-                                        </GeometryGroup>
-                                    </GeometryDrawing.Geometry>
-                                </GeometryDrawing>
-                            </DrawingBrush.Drawing>
-                        </DrawingBrush>
-                    </Rectangle.Fill>
-                </Rectangle>
-            </StackPanel>
-
-            <StackPanel
+                Grid.Row="0"
                 HorizontalAlignment="Right"
                 Orientation="Horizontal"
                 WindowChrome.IsHitTestVisibleInChrome="True">
@@ -257,7 +151,7 @@
         <DockingManager
             Grid.Row="1"
             prism:RegionManager.RegionName="ContentRegion"
-            AnchorablesSource="{Binding Tools}"
+			Layout="{Binding DockableMainViewContentProvider.Layout}"
             AutoHideDelay="0">
 
             <DockingManager.LayoutItemContainerStyleSelector>
@@ -265,7 +159,8 @@
                     <dockable:PanesStyleSelector.ToolStyle>
                         <Style TargetType="{x:Type LayoutAnchorableItem}">
                             <Setter Property="Title" Value="{Binding Model.Title}" />
-                            <Setter Property="CanHide" Value="False" />
+                            <Setter Property="CanHide" Value="True" />
+                            <Setter Property="CanClose" Value="True" />
                             <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}" />
                             <Setter Property="ContentId" Value="{Binding Model.ContentId}" />
                             <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}" />
@@ -274,7 +169,8 @@
                     </dockable:PanesStyleSelector.ToolStyle>
                     <dockable:PanesStyleSelector.FileStyle>
                         <Style TargetType="{x:Type LayoutItem}">
-                            <Setter Property="Title" Value="{Binding .Model.Title}" />
+	                        <Setter Property="CanClose" Value="True" />
+	                        <Setter Property="Title" Value="{Binding .Model.Title}" />
                             <Setter Property="ToolTip" Value="{Binding Model.FilePath}" />
                             <Setter Property="CloseCommand" Value="{Binding Model.DataContext.CloseCommand}" />
                             <Setter Property="ContentId" Value="{Binding Model.DataContext.ContentId}" />
@@ -292,7 +188,7 @@
             </DockingManager.LayoutItemContainerStyleSelector>
 
 
-            <LayoutRoot>
+            <!--<LayoutRoot>
                 <LayoutPanel Orientation="Horizontal">
                     <LayoutPanel Orientation="Vertical">
                         <LayoutDocumentPane />
@@ -308,7 +204,7 @@
                         <LayoutAnchorablePane Name="PropertiesPane" />
                     </LayoutAnchorablePaneGroup>
                 </LayoutPanel>
-            </LayoutRoot>
+            </LayoutRoot>-->
         </DockingManager>
 
         <Border Grid.Row="2" Background="{DynamicResource StatusBarBackground}">
