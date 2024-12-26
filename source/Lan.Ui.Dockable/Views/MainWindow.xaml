@@ -93,20 +93,18 @@
                 <Path
                     Width="16"
                     Height="16"
-					Margin="5 0"
+                    Margin="5,0"
                     Data="{StaticResource Leaf}"
                     Stretch="Uniform"
                     Stroke="{DynamicResource WindowForeground}"
                     StrokeThickness="1" />
 
+                <Menu
+                    VerticalAlignment="Center"
+                    ItemsSource="{Binding DockableMainViewContentProvider.Menus}"
+                    WindowChrome.IsHitTestVisibleInChrome="True" />
 
-                <Menu 
-					ItemsSource="{Binding DockableMainViewContentProvider.Menus}"
-	                VerticalAlignment="Center" WindowChrome.IsHitTestVisibleInChrome="True">
-                   
-                </Menu>
-
-                <ComboBox
+                <!--<ComboBox
                     Margin="4,0"
                     DisplayMemberPath="Item1"
 					Width="150"
@@ -133,7 +131,7 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
-                </Border>
+                </Border>-->
             </StackPanel>
 
             <StackPanel
@@ -151,60 +149,8 @@
         <DockingManager
             Grid.Row="1"
             prism:RegionManager.RegionName="ContentRegion"
-			Layout="{Binding DockableMainViewContentProvider.Layout}"
-            AutoHideDelay="0">
-
-            <DockingManager.LayoutItemContainerStyleSelector>
-                <dockable:PanesStyleSelector>
-                    <dockable:PanesStyleSelector.ToolStyle>
-                        <Style TargetType="{x:Type LayoutAnchorableItem}">
-                            <Setter Property="Title" Value="{Binding Model.Title}" />
-                            <Setter Property="CanHide" Value="{Binding Mode.CanHide}" />
-                            <Setter Property="CanClose" Value="{Binding Model.CanClose}" />
-                            <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}" />
-                            <Setter Property="ContentId" Value="{Binding Model.ContentId}" />
-                            <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}" />
-                            <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}" />
-                        </Style>
-                    </dockable:PanesStyleSelector.ToolStyle>
-                    <dockable:PanesStyleSelector.FileStyle>
-                        <Style TargetType="{x:Type LayoutItem}">
-	                        <Setter Property="CanClose" Value="True" />
-	                        <Setter Property="Title" Value="{Binding .Model.Title}" />
-                            <Setter Property="ToolTip" Value="{Binding Model.FilePath}" />
-                            <Setter Property="CloseCommand" Value="{Binding Model.DataContext.CloseCommand}" />
-                            <Setter Property="ContentId" Value="{Binding Model.DataContext.ContentId}" />
-                        </Style>
-                    </dockable:PanesStyleSelector.FileStyle>
-
-
-                    <dockable:PanesStyleSelector.MyDocumentStyle>
-                        <Style TargetType="LayoutDocumentItem">
-                            <Setter Property="Title" Value="{Binding Model.DataContext.Title}" />
-                        </Style>
-                    </dockable:PanesStyleSelector.MyDocumentStyle>
-
-                </dockable:PanesStyleSelector>
-            </DockingManager.LayoutItemContainerStyleSelector>
-
-
-            <!--<LayoutRoot>
-                <LayoutPanel Orientation="Horizontal">
-                    <LayoutPanel Orientation="Vertical">
-                        <LayoutDocumentPane />
-
-                        <LayoutAnchorablePaneGroup DockHeight="128" Orientation="Horizontal">
-                            <LayoutAnchorablePane Name="ErrorsPane" />
-                            <LayoutAnchorablePane Name="OutputPane" />
-                        </LayoutAnchorablePaneGroup>
-                    </LayoutPanel>
-
-                    <LayoutAnchorablePaneGroup DockWidth="200" Orientation="Vertical">
-                        <LayoutAnchorablePane Name="ExplorerPane" DockHeight="2*" />
-                        <LayoutAnchorablePane Name="PropertiesPane" />
-                    </LayoutAnchorablePaneGroup>
-                </LayoutPanel>
-            </LayoutRoot>-->
+            AutoHideDelay="0"
+            Layout="{Binding DockableMainViewContentProvider.Layout}">
         </DockingManager>
 
         <Border Grid.Row="2" Background="{DynamicResource StatusBarBackground}">

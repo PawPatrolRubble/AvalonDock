@@ -2,6 +2,11 @@
   <PropertyGroup>
     <TargetFramework>net6.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+	  <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+	  <IncludeReferencedProjects>true</IncludeReferencedProjects>
+	  <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	  <version>1.0.0</version>
+	  <description>init</description>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Wpf" Version="8.1.97" />
@@ -9,7 +14,7 @@
     <PackageReference Include="HandyControl" Version="3.5.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Components\AvalonDock.Themes.VS2013\AvalonDock.Themes.VS2013.csproj" />
+    <ProjectReference Include="..\Components\AvalonDock.Themes.VS2013\AvalonDock.Themes.VS2013.csproj"  PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Themes\BlueBrushsExtended.xaml">
@@ -21,4 +26,26 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+
+
+
+
+	<PropertyGroup>
+		<TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	</PropertyGroup>
+
+	<Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
+		<ItemGroup>
+			<BuildOutputInPackage
+				Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+		</ItemGroup>
+	</Target>
+
+
+	<Target Name="PublishToNexus" AfterTargets="Pack">
+		<Exec Command="dotnet nuget push &quot;$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg&quot; --source Nexus --api-key 648396fd-280e-37c7-8978-9e749499e1f7" />
+	</Target>
+
+
 </Project>

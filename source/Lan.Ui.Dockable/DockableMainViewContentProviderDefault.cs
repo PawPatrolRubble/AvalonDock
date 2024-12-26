@@ -34,9 +34,6 @@ public class DockableMainViewContentProviderDefault : IDockableMainViewContentPr
 		};
 
 
-
-
-
 		var leftPanel = new LayoutPanel()
 		{
 			Orientation = Orientation.Vertical
@@ -50,7 +47,7 @@ public class DockableMainViewContentProviderDefault : IDockableMainViewContentPr
 
 		RightPane = new LayoutAnchorablePane()
 		{
-			DockWidth = new GridLength(150)
+			DockWidth = new GridLength(200)
 		};
 		// Add DocumentPane and BottomPane to the left panel
 		Layout.RootPanel.Children.Add(leftPanel);
