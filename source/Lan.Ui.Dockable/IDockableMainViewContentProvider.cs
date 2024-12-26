@@ -18,5 +18,9 @@ namespace Lan.Ui.Dockable
 		LayoutDocumentPane DocumentPane { get; }
 		LayoutRoot Layout { get; set; }
 
+		/// <summary>
+		/// this is going to create the layout for dockingmanager
+		/// </summary>
+		void Initialize();
 	}
 }

@@ -42,9 +42,13 @@ namespace Lan.Ui.DockableApp
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
 		{
-			containerRegistry.RegisterSingleton<IDockableMainViewContentProvider, DockableMainViewContentProvider>();
+			containerRegistry.RegisterSingleton<IDockableMainViewContentProvider, DockableMainViewContentProviderDefault>();
 			containerRegistry.RegisterForNavigation<DocumentA, DocumentAViewModel>();
 			containerRegistry.RegisterForNavigation<B1, B1ViewModel>();
+			containerRegistry.RegisterForNavigation<Page2, Page2ViewModel>();
+			containerRegistry.RegisterForNavigation<B2, B2ViewModel>();
+			containerRegistry.RegisterForNavigation<Right1, Right1ViewModel>();
+			containerRegistry.RegisterForNavigation<Right2, Right2ViewModel>();
 		}
 
 		protected override void ConfigureRegionAdapterMappings(RegionAdapterMappings mappings)
@@ -91,7 +95,37 @@ namespace Lan.Ui.DockableApp
 						Header="go to b1",
 						Command =GlobalCommand.GoToPageCommand,
 						CommandParameter = nameof(B1)
+					},
+					new MenuItem{
+						Header="go to page2",
+						Command =GlobalCommand.GoToPageCommand,
+						CommandParameter = nameof(Page2)
+					},
+					new MenuItem{
+						Header="go to b2",
+						Command =GlobalCommand.GoToPageCommand,
+						CommandParameter = nameof(B2)
+					},
+
+					new MenuItem()
+					{
+						Header = "right",
+						Items =
+						{
+							new MenuItem{
+								Header="go to right1",
+								Command =GlobalCommand.GoToPageCommand,
+								CommandParameter = nameof(Right1)
+							},
+							new MenuItem{
+								Header="go to right2",
+								Command =GlobalCommand.GoToPageCommand,
+								CommandParameter = nameof(Right2)
+							},
+
+						}
 					}
+
 		});
 		}
 	}

@@ -41,6 +41,7 @@ namespace AvalonDock
 	[TemplatePart(Name = "PART_AutoHideArea")]
 	public class DockingManager : Control, IOverlayWindowHost//, ILogicalChildrenContainer
 	{
+		
 		#region fields
 		// ShortCut to current AvalonDock theme if OnThemeChanged() is invoked with DictionaryTheme instance
 		// in e.OldValue and e.NewValue of the passed event
@@ -77,6 +78,7 @@ namespace AvalonDock
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(DockingManager), new FrameworkPropertyMetadata(typeof(DockingManager)));
 			FocusableProperty.OverrideMetadata(typeof(DockingManager), new FrameworkPropertyMetadata(false));
 			HwndSource.DefaultAcquireHwndFocusInMenuMode = false;
+			
 		}
 
 		/// <summary>

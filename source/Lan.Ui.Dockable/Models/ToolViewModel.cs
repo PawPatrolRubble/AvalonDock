@@ -12,8 +12,3 @@ public class ToolViewModel : PanelViewModel
 		set { SetProperty(ref _isVisible, value); }
 	}
 }
-
-public class RightPaneViewModel : ToolViewModel
-{
-
-}

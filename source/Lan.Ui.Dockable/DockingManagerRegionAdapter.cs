@@ -63,6 +63,7 @@ namespace Lan.Ui.Dockable
 
 			regionTarget.AnchorableHidden += (s, e) =>
 			{
+				e.Anchorable.Close();
 				;
 			};
 
@@ -120,7 +121,7 @@ namespace Lan.Ui.Dockable
 								{
 									Content = view,
 									Title = bottomViewModel.Title,
-									CanHide = false
+									CanHide = bottomViewModel.CanHide
 								});
 								break;
 
@@ -190,7 +191,7 @@ namespace Lan.Ui.Dockable
 
 		private void OnAnchorableClosed(object sender, AnchorableClosedEventArgs args, IRegion region)
 		{
-			region.Remove(args.Anchorable);
+			region.Remove(args.Anchorable.Content);
 		}
 
 		#endregion  //Event handlers
