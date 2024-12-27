@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:viewModels="clr-namespace:Lan.Ui.Dockable.ViewModels"
+    xmlns:svg="https://github.com/dotnetprojects/SVGImage"
     Title="{Binding Title}"
     Width="1600"
     Height="900"
@@ -91,14 +92,26 @@
                 HorizontalAlignment="Left"
                 Orientation="Horizontal">
 
-                <Path
+
+
+				<svg:SVGImage 
+					Width="48"
+					Background="Transparent"
+					Source="/Lan.Ui.Dockable;component/Images/logo.svg"/>
+
+				<!--<Image 
+					Stretch="Fill"
+					Width="48"
+					Source="pack://application:,,,/Lan.Ui.Dockable;component/Images/logo.png"></Image>-->
+
+                <!--<Path
                     Width="16"
                     Height="16"
                     Margin="5,0"
                     Data="{StaticResource Leaf}"
                     Stretch="Uniform"
                     Stroke="{DynamicResource WindowForeground}"
-                    StrokeThickness="1" />
+                    StrokeThickness="1" />-->
 
                 <Menu
                     VerticalAlignment="Center"
