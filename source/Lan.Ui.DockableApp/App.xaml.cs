@@ -20,14 +20,11 @@ namespace Lan.Ui.DockableApp
 
 	public static class GlobalCommand
 	{
-
 		public static ICommand GoToPageCommand
 		{
 			get;
 			set;
 		}
-
-
 	}
 
 	/// <summary>

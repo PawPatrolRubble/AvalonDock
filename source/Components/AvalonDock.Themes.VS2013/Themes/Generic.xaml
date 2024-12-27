@@ -1455,7 +1455,6 @@
                         Style="{DynamicResource DropDownControlArea}">
                         <Border
                             x:Name="Header"
-                            Height="19"
                             Margin="0,0,0,2"
                             Padding="1,0"
                             Background="{TemplateBinding Background}"
@@ -1482,7 +1481,7 @@
                                     Height="15"
                                     Margin="3,0"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Bottom"
+                                    VerticalAlignment="Center"
                                     Command="{Binding Path=LayoutItem.CloseCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     Style="{StaticResource AvalonDockThemeVs2013ButtonStyle}"
                                     ToolTip="{x:Static avalonDockProperties:Resources.Document_Close}"

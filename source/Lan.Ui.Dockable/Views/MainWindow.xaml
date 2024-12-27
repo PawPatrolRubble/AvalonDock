@@ -19,6 +19,7 @@
     d:DesignWidth="1920"
     prism:ViewModelLocator.AutoWireViewModel="True"
     Background="{DynamicResource HeaderBackground}"
+    Closing="Window_Closing"
     Foreground="{DynamicResource WindowForeground}"
     ResizeMode="CanResizeWithGrip"
     SnapsToDevicePixels="True"
@@ -150,7 +151,14 @@
             Grid.Row="1"
             prism:RegionManager.RegionName="ContentRegion"
             AutoHideDelay="0"
-            Layout="{Binding DockableMainViewContentProvider.Layout}">
+            Layout="{Binding DockableMainViewContentProvider.Layout}" >
+
+			<DockingManager.DocumentHeaderTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding Title}" FontSize="16"></TextBlock>
+				</DataTemplate>
+			</DockingManager.DocumentHeaderTemplate>
+
         </DockingManager>
 
         <Border Grid.Row="2" Background="{DynamicResource StatusBarBackground}">

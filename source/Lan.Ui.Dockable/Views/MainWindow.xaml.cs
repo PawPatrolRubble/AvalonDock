@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Windows;
 using Lan.Ui.Dockable.ViewModels;
 
@@ -13,6 +14,20 @@ namespace Lan.Ui.Dockable.Views
 		{
 			InitializeComponent();
 		}
+
+		private void Window_Closing(object sender, CancelEventArgs e)
+		{
+			// Show a confirmation message box
+			MessageBoxResult result = MessageBox.Show("Are you sure you want to exit?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+			// Check the user's response
+			if (result == MessageBoxResult.No)
+			{
+				// Cancel the closing event
+				e.Cancel = true;
+			}
+		}
+
 
 		private void MinimizeClick(object sender, RoutedEventArgs e)
 		{

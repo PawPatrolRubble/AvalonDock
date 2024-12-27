@@ -5,8 +5,8 @@
 	  <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
 	  <IncludeReferencedProjects>true</IncludeReferencedProjects>
 	  <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-	  <version>1.0.0</version>
-	  <description>init</description>
+	  <version>1.0.1</version>
+	  <description>removed unused codes</description>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Wpf" Version="8.1.97" />
@@ -14,7 +14,9 @@
     <PackageReference Include="HandyControl" Version="3.5.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Components\AvalonDock.Themes.VS2013\AvalonDock.Themes.VS2013.csproj"  PrivateAssets="All" />
+    <ProjectReference Include="..\Components\AvalonDock.Themes.Aero\AvalonDock.Themes.Aero.csproj" />
+    <ProjectReference Include="..\Components\AvalonDock.Themes.Expression\AvalonDock.Themes.Expression.csproj" />
+    <ProjectReference Include="..\Components\AvalonDock.Themes.VS2013\AvalonDock.Themes.VS2013.csproj" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Themes\BlueBrushsExtended.xaml">
@@ -37,8 +39,7 @@
 
 	<Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
 		<ItemGroup>
-			<BuildOutputInPackage
-				Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+			<BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
 		</ItemGroup>
 	</Target>
 

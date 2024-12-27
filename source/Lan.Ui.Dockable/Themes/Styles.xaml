@@ -4,8 +4,11 @@
     xmlns:MLib_reskeys="clr-namespace:MLib.Themes;assembly=MLib">
 
     <ResourceDictionary.MergedDictionaries>
-        <!--<ResourceDictionary Source="pack://application:,,,/MLib;component/Themes/DarkTheme.xaml" />-->
+	
+		<!--<ResourceDictionary Source="pack://application:,,,/MLib;component/Themes/DarkTheme.xaml" />-->
         <ResourceDictionary Source="pack://application:,,,/Lan.Ui.Dockable;component/Themes/LightBrushsExtended.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AvalonDock;component/Themes/generic.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AvalonDock.Themes.VS2013;component/LightTheme.xaml" />
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
