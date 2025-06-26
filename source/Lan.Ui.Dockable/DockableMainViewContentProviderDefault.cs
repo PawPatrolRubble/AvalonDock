@@ -8,6 +8,7 @@ namespace Lan.Ui.Dockable;
 public class DockableMainViewContentProviderDefault : IDockableMainViewContentProvider
 {
 	public LayoutAnchorablePane RightPane { get; private set; }
+	public LayoutAnchorablePane LeftPane { get; private set; }
 	public LayoutAnchorablePane BottomPane { get; private set; }
 	public LayoutDocumentPane DocumentPane { get; private set; }
 
@@ -49,10 +50,16 @@ public class DockableMainViewContentProviderDefault : IDockableMainViewContentPr
 		{
 			DockWidth = new GridLength(200)
 		};
+
+		LeftPane = new LayoutAnchorablePane()
+		{
+			DockWidth = new GridLength(200)
+		};
+
 		// Add DocumentPane and BottomPane to the left panel
+		Layout.RootPanel.Children.Add(LeftPane);
 		Layout.RootPanel.Children.Add(leftPanel);
 		Layout.RootPanel.Children.Add(RightPane);
-
 
 		// Create the right anchorable pane group
 		//var rightPaneGroup = new LayoutAnchorablePaneGroup { DockWidth = new System.Windows.GridLength(200), Orientation = Orientation.Vertical };

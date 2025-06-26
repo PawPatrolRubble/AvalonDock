@@ -46,6 +46,7 @@ namespace Lan.Ui.DockableApp
 			containerRegistry.RegisterForNavigation<B2, B2ViewModel>();
 			containerRegistry.RegisterForNavigation<Right1, Right1ViewModel>();
 			containerRegistry.RegisterForNavigation<Right2, Right2ViewModel>();
+			containerRegistry.RegisterForNavigation<Left1, Left1ViewModel>();
 		}
 
 		protected override void ConfigureRegionAdapterMappings(RegionAdapterMappings mappings)
@@ -118,6 +119,19 @@ namespace Lan.Ui.DockableApp
 								Header="go to right2",
 								Command =GlobalCommand.GoToPageCommand,
 								CommandParameter = nameof(Right2)
+							},
+
+						}
+					},
+					new MenuItem()
+					{
+						Header = "left",
+						Items =
+						{
+							new MenuItem{
+								Header="go to left",
+								Command =GlobalCommand.GoToPageCommand,
+								CommandParameter = nameof(Left1)
 							},
 
 						}

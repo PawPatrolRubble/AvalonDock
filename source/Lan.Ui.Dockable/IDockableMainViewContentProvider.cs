@@ -14,6 +14,7 @@ namespace Lan.Ui.Dockable
 	{
 		ObservableCollection<MenuItem> Menus { get; }
 		LayoutAnchorablePane RightPane { get; }
+		LayoutAnchorablePane LeftPane { get; }
 		LayoutAnchorablePane BottomPane { get; }
 		LayoutDocumentPane DocumentPane { get; }
 		LayoutRoot Layout { get; set; }

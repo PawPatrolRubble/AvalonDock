@@ -5,8 +5,8 @@
 	  <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
 	  <IncludeReferencedProjects>true</IncludeReferencedProjects>
 	  <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-	  <version>1.0.4</version>
-	  <description>add icon of nop</description>
+	  <version>1.0.5</version>
+	  <description>add left pane area</description>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Images\logo.png" />
