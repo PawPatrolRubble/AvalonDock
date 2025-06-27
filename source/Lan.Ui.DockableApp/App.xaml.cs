@@ -11,6 +11,8 @@ using Prism.Ioc;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
 using Lan.Ui.DockableApp.ViewModels;
 using Lan.Ui.DockableApp.Views;
 using Prism.Commands;
@@ -80,64 +82,81 @@ namespace Lan.Ui.DockableApp
 
 			GlobalCommand.GoToPageCommand = new DelegateCommand<object>(GoToPage);
 
+
+		}
+
+		protected override void OnInitialized()
+		{
+			base.OnInitialized();
+			var res = FindResource("LogosAndroid") as Geometry;
+			var bound = res.Bounds;
 			var provider = Container.Resolve<IDockableMainViewContentProvider>();
 			provider.Menus.AddRange(new MenuItem[]{
 
-					new MenuItem{
-						Header="go to tests",
-						Command =GlobalCommand.GoToPageCommand,
-						CommandParameter = nameof(DocumentA)
-					}	,
-					
-					new MenuItem{
-						Header="go to b1",
-						Command =GlobalCommand.GoToPageCommand,
-						CommandParameter = nameof(B1)
-					},
-					new MenuItem{
-						Header="go to page2",
-						Command =GlobalCommand.GoToPageCommand,
-						CommandParameter = nameof(Page2)
-					},
-					new MenuItem{
-						Header="go to b2",
-						Command =GlobalCommand.GoToPageCommand,
-						CommandParameter = nameof(B2)
-					},
-
-					new MenuItem()
+				new MenuItem{
+					Header="go to tests",
+					Command =GlobalCommand.GoToPageCommand,
+					CommandParameter = nameof(DocumentA),
+					Icon = new Path
 					{
-						Header = "right",
-						Items =
-						{
-							new MenuItem{
-								Header="go to right1",
-								Command =GlobalCommand.GoToPageCommand,
-								CommandParameter = nameof(Right1)
-							},
-							new MenuItem{
-								Header="go to right2",
-								Command =GlobalCommand.GoToPageCommand,
-								CommandParameter = nameof(Right2)
-							},
-
-						}
-					},
-					new MenuItem()
-					{
-						Header = "left",
-						Items =
-						{
-							new MenuItem{
-								Header="go to left",
-								Command =GlobalCommand.GoToPageCommand,
-								CommandParameter = nameof(Left1)
-							},
-
-						}
+						Data = FindResource("LogosAndroid") as Geometry,
+						Fill = Brushes.Red,
+						StrokeThickness = 1,
+						Stretch = Stretch.Uniform,
+						Width = 16,
+						Height = 16
 					}
+				}   ,
 
-		});
+				new MenuItem{
+					Header="go to b1",
+					Command =GlobalCommand.GoToPageCommand,
+					CommandParameter = nameof(B1)
+				},
+				new MenuItem{
+					Header="go to page2",
+					Command =GlobalCommand.GoToPageCommand,
+					CommandParameter = nameof(Page2)
+				},
+				new MenuItem{
+					Header="go to b2",
+					Command =GlobalCommand.GoToPageCommand,
+					CommandParameter = nameof(B2)
+				},
+
+				new MenuItem()
+				{
+					Header = "right",
+					Items =
+					{
+						new MenuItem{
+							Header="go to right1",
+							Command =GlobalCommand.GoToPageCommand,
+							CommandParameter = nameof(Right1)
+						},
+						new MenuItem{
+							Header="go to right2",
+							Command =GlobalCommand.GoToPageCommand,
+							CommandParameter = nameof(Right2)
+						},
+
+					}
+				},
+				new MenuItem()
+				{
+					Header = "left",
+					Items =
+					{
+						new MenuItem{
+							Header="go to left",
+							Command =GlobalCommand.GoToPageCommand,
+							CommandParameter = nameof(Left1)
+						},
+
+					}
+				}
+
+			});
 		}
 	}
 }
