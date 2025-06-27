@@ -2912,6 +2912,13 @@ namespace AvalonDock
 					Top = contentModel.FloatingTop
 				};
 			}
+
+			if (Application.Current.MainWindow != null)
+			{
+				fwc.Width = Application.Current.MainWindow.Width * 0.6;
+				fwc.Height = Application.Current.MainWindow.Height * 0.6; ;
+			}
+
 			//fwc.Owner = Window.GetWindow(this);
 			//fwc.SetParentToMainWindowOf(this);
 			_fwList.Add(fwc);

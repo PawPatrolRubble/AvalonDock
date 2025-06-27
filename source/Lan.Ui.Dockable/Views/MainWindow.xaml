@@ -6,8 +6,8 @@
     xmlns:dockable="clr-namespace:Lan.Ui.Dockable"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
-    xmlns:viewModels="clr-namespace:Lan.Ui.Dockable.ViewModels"
     xmlns:svg="https://github.com/dotnetprojects/SVGImage"
+    xmlns:viewModels="clr-namespace:Lan.Ui.Dockable.ViewModels"
     Title="{Binding Title}"
     Width="1600"
     Height="900"
@@ -33,6 +33,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Lan.Ui.Dockable;component/Themes/Styles.xaml" />
+                <ResourceDictionary Source="/Nop.Common.UiCommon.HandyControl;component/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <Style x:Key="MenuItemDefault" TargetType="MenuItem">
@@ -80,31 +81,36 @@
             <RowDefinition Height="23" />
         </Grid.RowDefinitions>
 
-        <Grid x:Name="header" SizeChanged="HeaderSizeChanged">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="4" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <StackPanel
-                Margin="8,4"
-                HorizontalAlignment="Left"
-                Orientation="Horizontal">
 
 
+		<Border BorderBrush="#e0e0e0" BorderThickness="0,0,0,1">
 
-				<svg:SVGImage 
-					Width="48"
-					Background="Transparent"
-					Source="/Lan.Ui.Dockable;component/Images/logo.svg"/>
 
-				<!--<Image 
+            <Grid x:Name="header" SizeChanged="HeaderSizeChanged">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="4" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackPanel
+                    Margin="8,4"
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal">
+
+
+
+                    <svg:SVGImage
+                        Width="48"
+                        Background="Transparent"
+                        Source="/Lan.Ui.Dockable;component/Images/logo.svg" />
+
+                    <!--<Image
 					Stretch="Fill"
 					Width="48"
 					Source="pack://application:,,,/Lan.Ui.Dockable;component/Images/logo.png"></Image>-->
 
-                <!--<Path
+                    <!--<Path
                     Width="16"
                     Height="16"
                     Margin="5,0"
@@ -113,12 +119,15 @@
                     Stroke="{DynamicResource WindowForeground}"
                     StrokeThickness="1" />-->
 
-                <Menu
-                    VerticalAlignment="Center"
-                    ItemsSource="{Binding DockableMainViewContentProvider.Menus}"
-                    WindowChrome.IsHitTestVisibleInChrome="True" />
+                    <Menu
+                        VerticalAlignment="Center"
+                        Background="{StaticResource BackgroundBrush}"
+                        FontSize="16"
+                        ItemsSource="{Binding DockableMainViewContentProvider.Menus}"
+                        Style="{StaticResource MenuBaseStyle}"
+                        WindowChrome.IsHitTestVisibleInChrome="True" />
 
-                <!--<ComboBox
+                    <!--<ComboBox
                     Margin="4,0"
                     DisplayMemberPath="Item1"
 					Width="150"
@@ -146,31 +155,47 @@
                         </TextBlock.Style>
                     </TextBlock>
                 </Border>-->
-            </StackPanel>
+                </StackPanel>
 
-            <StackPanel
-                Grid.Row="0"
-                HorizontalAlignment="Right"
-                Orientation="Horizontal"
-                WindowChrome.IsHitTestVisibleInChrome="True">
-                <Button Click="MinimizeClick" Style="{StaticResource MinimizeButton}" />
-                <Button Click="MaximizeClick" Style="{StaticResource MaximizeButton}" />
-                <Button Click="RestoreDownClick" Style="{StaticResource RestoreDownButton}" />
-                <Button Click="CloseClick" Style="{StaticResource CloseButton}" />
-            </StackPanel>
-        </Grid>
+                <StackPanel
+                    Grid.Row="0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal"
+                    WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Button Click="MinimizeClick" Style="{StaticResource MinimizeButton}" />
+                    <Button Click="MaximizeClick" Style="{StaticResource MaximizeButton}" />
+                    <Button Click="RestoreDownClick" Style="{StaticResource RestoreDownButton}" />
+                    <Button Click="CloseClick" Style="{StaticResource CloseButton}" />
+                </StackPanel>
+            </Grid>
+        </Border>
 
         <DockingManager
+            x:Name="DockingManager"
             Grid.Row="1"
             prism:RegionManager.RegionName="ContentRegion"
             AutoHideDelay="0"
-            Layout="{Binding DockableMainViewContentProvider.Layout}" >
+            Layout="{Binding DockableMainViewContentProvider.Layout}">
 
-			<DockingManager.DocumentHeaderTemplate>
-				<DataTemplate>
-					<TextBlock Text="{Binding Title}" FontSize="16"></TextBlock>
-				</DataTemplate>
-			</DockingManager.DocumentHeaderTemplate>
+            <DockingManager.DocumentHeaderTemplate>
+                <DataTemplate>
+                    <Border Padding="3">
+
+                        <TextBlock
+                            x:Name="TextBlock"
+                            Margin="5,0"
+                            FontSize="14"
+                            Text="{Binding Title}" />
+                    </Border>
+
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding IsActive}" Value="true">
+                            <Setter TargetName="TextBlock" Property="FontWeight" Value="Bold" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+
+                </DataTemplate>
+            </DockingManager.DocumentHeaderTemplate>
 
         </DockingManager>
 

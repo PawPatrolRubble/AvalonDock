@@ -9,7 +9,7 @@
 
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-		
+				<ResourceDictionary Source="/Nop.Common.UiCommon.HandyControl;component/Styles.xaml" />
 				<ResourceDictionary Source="pack://application:,,,/Lan.Ui.Dockable;component/Themes/Styles.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 

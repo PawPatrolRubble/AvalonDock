@@ -12,7 +12,7 @@ namespace Lan.Ui.DockableApp.ViewModels
 	{
 		public Page2ViewModel()
 		{
-			Title = "page2";
+			Title = "page2 title";
 		}
 	}
 }
